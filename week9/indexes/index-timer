@@ -27,7 +27,7 @@ num_reps=1
 while true; do
     echo -n "$num_reps repetitions"
     start=$SECONDS
-    for i in $(seq $num_reps); do
+    for _ in $(seq $num_reps); do
         echo -n .
         sqlite3 $db_file "$query" >& /dev/null
     done
@@ -44,7 +44,7 @@ if [ $index != none ]; then
     nd_query="SELECT COUNT(*) FROM (SELECT DISTINCT $index FROM Bird_nests)"
     num_distinct=$(sqlite3 -csv $db_file "$nd_query" 2> /dev/null)
 else
-    num_distinct=
+    num_distinct=1
 fi
 
 if [ $index != none ]; then
